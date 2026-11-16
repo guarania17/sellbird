@@ -370,7 +370,8 @@ class DashboardGuard:
         # 1. Host, before anything else.
         hosts = headers.get("host", [])
         host = parse_host(hosts[0]) if len(hosts) == 1 else None
-        if host is None or not is_loopback(host):
+        allowed_hosts = {h.strip().lower() for h in os.environ.get("SELLBIRD_ALLOWED_HOST", "").split(",") if h.strip()}
+        if host is None or not (is_loopback(host) or host in allowed_hosts):
             return await deny(400, "bad_host",
                               "This dashboard only answers to localhost / 127.0.0.1.")
         host_header = hosts[0].lower()
@@ -381,7 +382,8 @@ class DashboardGuard:
                       and headers.get("sec-fetch-mode", [""])[0] == "navigate"
                       and headers.get("sec-fetch-dest", [""])[0] == "document")
         origins = headers.get("origin", [])
-        if origins and (len(origins) != 1 or origins[0].lower() != f"http://{host_header}"):
+        allowed_origins = {f"http://{host_header}", f"https://{host_header}"}
+        if origins and (len(origins) != 1 or origins[0].lower() not in allowed_origins):
             if not navigation:
                 return await deny(403, "cross_origin", "Cross-origin requests are refused.")
         site = headers.get("sec-fetch-site", [])

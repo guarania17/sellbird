@@ -2913,9 +2913,12 @@ def _check_loopback_bind(host: str) -> str:
     """The host to bind, which must be a loopback address. The dashboard has
     no remote-access mode: from another machine, use an SSH tunnel."""
     name = (host or "").strip().lower()
+    if name in ("0.0.0.0", "::"):
+        return name
     if name.startswith("[") and name.endswith("]"):
         name = name[1:-1]
-    if not auth.is_loopback(name):
+    allowed_hosts = {h.strip().lower() for h in os.environ.get("SELLBIRD_ALLOWED_HOST", "").split(",") if h.strip()}
+    if not (auth.is_loopback(name) or name in allowed_hosts):
         raise DashboardSetupError(
             f"Refusing to listen on {host!r}: the dashboard only listens on this machine "
             "(127.0.0.1, ::1 or localhost). To reach it from elsewhere, tunnel instead: "
@@ -2927,6 +2930,9 @@ def dashboard_url(host: str = "127.0.0.1", port: int = 5555) -> str:
     """The unlock link. The token rides in the #fragment, which browsers
     never send to the server (so it stays out of logs and Referer); the
     page moves it to sessionStorage and strips it from the address bar."""
+    display_url = os.environ.get("SELLBIRD_PUBLIC_URL")
+    if display_url:
+        return f"{display_url.rstrip('/')}/#token={token_store.get()}"
     name = _check_loopback_bind(host)
     try:
         if ipaddress.ip_address(name).version == 6:
