@@ -210,6 +210,14 @@ def _read_token_settled(path: Path) -> str | None:
 
 def load_or_create_token(path: Path) -> str:
     path = Path(path)
+    if path.name == "dashboard-token" and os.environ.get("SELLBIRD_DASHBOARD_TOKEN"):
+        env_token = os.environ["SELLBIRD_DASHBOARD_TOKEN"].strip()
+        if TOKEN_RE.fullmatch(env_token):
+            return env_token
+    if path.name == "agent-token" and os.environ.get("SELLBIRD_AGENT_TOKEN"):
+        env_token = os.environ["SELLBIRD_AGENT_TOKEN"].strip()
+        if TOKEN_RE.fullmatch(env_token):
+            return env_token
     try:
         path.parent.mkdir(mode=0o700, parents=True, exist_ok=True)
     except OSError as e:
@@ -249,6 +257,16 @@ class TokenStore:
         """The token if its file already exists; never creates one."""
         with self._lock:
             if self._token is None:
+                if self.path.name == "dashboard-token" and os.environ.get("SELLBIRD_DASHBOARD_TOKEN"):
+                    env_token = os.environ["SELLBIRD_DASHBOARD_TOKEN"].strip()
+                    if TOKEN_RE.fullmatch(env_token):
+                        self._token = env_token
+                        return self._token
+                if self.path.name == "agent-token" and os.environ.get("SELLBIRD_AGENT_TOKEN"):
+                    env_token = os.environ["SELLBIRD_AGENT_TOKEN"].strip()
+                    if TOKEN_RE.fullmatch(env_token):
+                        self._token = env_token
+                        return self._token
                 self._token = _read_token_settled(self.path)
             return self._token
 
