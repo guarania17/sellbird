@@ -696,7 +696,7 @@ class UsageConfig(BaseModel):
         return v
 
 
-BRAIN_PROVIDERS = ("claude", "codex")
+BRAIN_PROVIDERS = ("claude", "codex", "deepseek", "gemini", "openai")
 CODEX_REASONING_EFFORTS = ("minimal", "low", "medium", "high", "xhigh")
 
 # Model names are passed to a CLI, so they must look like a model name and
@@ -705,17 +705,20 @@ _MODEL_NAME_RE = re.compile(r"^[A-Za-z0-9][A-Za-z0-9._:/\[\]-]{0,127}$")
 
 
 class BrainConfig(BaseModel):
-    """Which subscription Sellbird thinks with.
+    """Which AI model Sellbird thinks with.
 
-    ``claude`` (default) runs Claude Code headless on your Claude plan.
-    ``codex`` runs Codex on your ChatGPT plan. There is never an automatic
-    fallback between them, and an explicit ``model`` only affects Sellbird —
-    your own Claude Code / Codex settings are never read or changed.
+    ``claude`` runs Claude Code headless on your Claude plan.
+    ``codex`` runs Codex on your ChatGPT plan.
+    ``deepseek`` runs DeepSeek API (using DEEPSEEK_API_KEY).
+    ``gemini`` runs Google Gemini API (using GEMINI_API_KEY).
+    ``openai`` runs OpenAI API (using OPENAI_API_KEY).
     """
 
     provider: str = "claude"
-    model: str = ""  # empty = the provider's own default
+    model: str = ""  # empty = provider default
     reasoning_effort: str = ""  # codex only; empty = model default
+    api_key: str = ""  # optional override; defaults to environment variable
+    api_base: str = ""  # optional custom endpoint base URL
 
     @field_validator("provider", mode="before")
     @classmethod

@@ -356,7 +356,7 @@ def cmd_usage(args):
         except Exception:
             pass
 
-        label = {"claude": "Claude", "codex": "Codex"}.get(provider, "Brain")
+        label = {"claude": "Claude", "codex": "Codex", "deepseek": "DeepSeek", "gemini": "Gemini", "openai": "OpenAI"}.get(provider, "Brain")
         print(f"\n  {label} Usage")
         print("  " + "=" * 52)
         if windows:

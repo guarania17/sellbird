@@ -40,7 +40,13 @@ _NON_RETRYABLE_PATTERNS = (
 )
 
 
-PROVIDER_LABELS = {"claude": "Claude", "codex": "Codex"}
+PROVIDER_LABELS = {
+    "claude": "Claude",
+    "codex": "Codex",
+    "deepseek": "DeepSeek",
+    "gemini": "Gemini",
+    "openai": "OpenAI",
+}
 
 # Settings key holding the brain's last health transition, for `sellbird
 # status` and the dashboard: {"provider", "status": "ok"|"paused", "reason",
@@ -130,10 +136,35 @@ class Brain:
                 model=self.model, reasoning_effort=self.config.reasoning_effort
             )
             self.quota = CodexQuotaClient(self.codex)
+        elif self.provider in ("deepseek", "gemini", "openai"):
+            self.quota = None
         else:
             # Lazy import avoids a cycle (quota -> usage -> state).
             from sellbird.integrations.quota import QuotaClient
             self.quota = QuotaClient()
+
+    def _resolve_api_key(self) -> str:
+        if getattr(self.config, "api_key", ""):
+            return str(self.config.api_key).strip()
+        env_map = {
+            "deepseek": "DEEPSEEK_API_KEY",
+            "gemini": "GEMINI_API_KEY",
+            "openai": "OPENAI_API_KEY",
+        }
+        var = env_map.get(self.provider)
+        import os
+        return os.environ.get(var, "").strip() if var else ""
+
+    def _api_preflight(self) -> str:
+        key = self._resolve_api_key()
+        if not key:
+            env_var = {
+                "deepseek": "DEEPSEEK_API_KEY",
+                "gemini": "GEMINI_API_KEY",
+                "openai": "OPENAI_API_KEY",
+            }.get(self.provider, "API_KEY")
+            return f"{env_var} is not set in environment or config."
+        return ""
 
     @property
     def provider_label(self) -> str:
@@ -153,19 +184,9 @@ class Brain:
         return ""
 
     async def preflight(self) -> str:
-        """Can this Brain be used right now? Returns "" or the reason not.
-
-        Codex only (Claude keeps its existing behaviour): runs the adapter's
-        full pre-prompt check (CodexClient.preflight): CLI version, route and
-        lockdown attested with no login in the runtime, the native login read
-        only (expiry, renewal), then with the access-only copy the configured
-        model against the catalog, the ChatGPT account, and a started
-        tool-less thread. No turn, so no inference; nothing is written to the
-        native login. While paused, the check is repeated only when the login
-        file or the Codex executable changes, or every
-        PROVIDER_RECHECK_SECONDS, so a persistent problem doesn't start
-        runtimes every heartbeat.
-        """
+        """Can this Brain be used right now? Returns "" or the reason not."""
+        if self.provider in ("deepseek", "gemini", "openai"):
+            return self._api_preflight()
         if self.provider != "codex":
             return await self._claude_preflight()
         from sellbird.codex import CodexError
@@ -223,6 +244,8 @@ class Brain:
         return ""
 
     def _fingerprint(self):
+        if self.provider in ("deepseek", "gemini", "openai"):
+            return self._resolve_api_key()[:8]
         if self.provider == "codex":
             return self.codex.fingerprint()
         from sellbird.claude_runtime import fingerprint
@@ -297,6 +320,11 @@ class Brain:
         if self.provider == "codex":
             return await self._think_codex(
                 prompt, session_id=session_id, timeout=timeout,
+                max_retries=max_retries, agent=agent, task=task,
+            )
+        if self.provider in ("deepseek", "gemini", "openai"):
+            return await self._think_api(
+                prompt, expect_json=expect_json, timeout=timeout,
                 max_retries=max_retries, agent=agent, task=task,
             )
 
@@ -718,6 +746,82 @@ class Brain:
             logger.warning(f"Brain transport call failed ({agent}/{task}): {type(e).__name__}: {e}")
             return ""
         return str(text or "")
+
+    async def _think_api(
+        self,
+        prompt: str,
+        *,
+        expect_json: bool = False,
+        timeout: float = DEFAULT_TIMEOUT_SECONDS,
+        max_retries: int = DEFAULT_MAX_RETRIES,
+        agent: str = "",
+        task: str = "",
+    ) -> str:
+        """Call DeepSeek, Gemini, or OpenAI API."""
+        import httpx
+
+        api_key = self._resolve_api_key()
+        if not api_key:
+            logger.error(f"{self.provider_label} API key is not configured.")
+            return ""
+
+        defaults = {
+            "deepseek": ("https://api.deepseek.com", "deepseek-chat"),
+            "gemini": ("https://generativelanguage.googleapis.com/v1beta/openai", "gemini-2.5-flash"),
+            "openai": ("https://api.openai.com/v1", "gpt-4o-mini"),
+        }
+        base_url_default, model_default = defaults.get(self.provider, ("https://api.deepseek.com", "deepseek-chat"))
+        base_url = (getattr(self.config, "api_base", "") or base_url_default).rstrip("/")
+        model = self.model or model_default
+
+        url = f"{base_url}/chat/completions"
+        headers = {
+            "Authorization": f"Bearer {api_key}",
+            "Content-Type": "application/json",
+        }
+        payload = {
+            "model": model,
+            "messages": [{"role": "user", "content": prompt}],
+            "temperature": 0.7,
+        }
+        if expect_json:
+            payload["response_format"] = {"type": "json_object"}
+
+        last_error = ""
+        for attempt in range(max_retries + 1):
+            if attempt > 0:
+                delay = RETRY_BASE_DELAY * (2 ** (attempt - 1))
+                await asyncio.sleep(delay)
+            try:
+                async with httpx.AsyncClient(timeout=timeout) as client:
+                    resp = await client.post(url, headers=headers, json=payload)
+                if resp.status_code != 200:
+                    last_error = f"HTTP {resp.status_code}: {resp.text[:300]}"
+                    logger.error(f"{self.provider_label} call failed: {last_error}")
+                    if resp.status_code in (401, 403):
+                        return ""
+                    continue
+                data = resp.json()
+                content = data["choices"][0]["message"]["content"]
+
+                try:
+                    await self.state.increment_usage()
+                    usage = data.get("usage", {})
+                    await self._record_usage({
+                        "input_tokens": usage.get("prompt_tokens", 0),
+                        "output_tokens": usage.get("completion_tokens", 0),
+                    }, agent=agent, task=task)
+                except Exception as e:
+                    logger.warning(f"Failed to record usage: {e}")
+
+                return content
+            except Exception as e:
+                last_error = str(e)
+                logger.error(f"{self.provider_label} error: {e}")
+                continue
+
+        logger.error(f"{self.provider_label} failed after retries: {last_error}")
+        return ""
 
     def load_prompt(self, prompt_name: str, **kwargs) -> str:
         """Load a prompt template from the prompts/ directory and fill in variables."""
