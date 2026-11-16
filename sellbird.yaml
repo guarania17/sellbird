@@ -1,60 +1,61 @@
 persona:
-  name: "Alex"
-  company: "Your Company"
-  role: "Business Development"
-  email: "alex@yourcompany.com"
-  linkedin: "linkedin.com/in/alex-yourcompany"
-  tone: "professional, consultative, confident"
+  name: "Bader Vera"
+  company: "GuaranIA"
+  role: "Fundador / Lead AI Architect"
+  email: "ventas@guarania.com.py"
+  linkedin: "linkedin.com/in/badervera"
+  tone: "profesional, consultivo, pragmático y orientado a resultados"
 
 product:
-  name: "Your Product"
-  description: "Describe what your product does and who it's for"
-  pricing: "Starting at $X/mo"
+  name: "GuaranIA - Soluciones de IA y Automatización"
+  description: "Consultoría e implementación de agentes inteligentes, automatización de procesos operativos y desarrollo de software a medida para empresas y PyMEs que buscan escalar y reducir costos operativos con IA."
+  pricing: "Proyectos a medida / Consultoría"
   key_benefits:
-    - "Benefit 1"
-    - "Benefit 2"
-    - "Benefit 3"
+    - "Automatización de flujos operativos y reducción drástica de tiempos manuales"
+    - "Integración de agentes de IA y LLMs conectados a las bases de datos de la empresa"
+    - "Desarrollo de software y microservicios a medida con arquitectura cloud robusta"
   objection_responses:
-    "too expensive": "I understand budget is important. Most of our clients see ROI within 30 days..."
-    "already have a solution": "That makes sense. Curious — what's the one thing you wish it did better?"
-    "not interested": "No worries at all. Mind if I ask what your current approach looks like?"
+    "demasiado caro": "Entiendo perfectamente el cuidado del presupuesto. Diseñamos pilotos modulares con ROI tangible en los primeros 30 a 60 días antes de escalar la inversión."
+    "ya tenemos equipo técnico": "Excelente. Trabajamos frecuentemente como aceleradores de equipos internos, transfiriendo conocimiento e implementando la infraestructura de IA sin desviar el foco del core de tu equipo."
+    "no estamos seguros de si necesitamos IA": "Totalmente comprensible. La IA solo tiene sentido si resuelve un cuello de botella real de horas-hombre o conversión. Por eso partimos de un diagnóstico rápido de tus procesos sin compromiso."
   offer:
-    primary: ""                    # Main offer (e.g., "Monthly subscription starting at $99/mo")
-    entry: ""                      # Low-commitment entry (e.g., "14-day free trial", "Free audit")
-    goal: "book_call"              # Goal of outreach: book_call, start_trial, get_reply
-    booking_method: "calendar_link" # calendar_link, suggest_times, ask_preference
-    booking_url: ""                # Calendar link URL (if using calendar_link method)
-    meeting_duration: "15 minutes" # How long the call is
-    meeting_owner: ""              # Who takes the meeting (name or role)
+    primary: "Implementación de IA y Automatizaciones operativas a medida"
+    entry: "Diagnóstico gratuito de 15 minutos sobre oportunidades de automatización en tu empresa"
+    goal: "book_call"
+    booking_method: "calendar_link"
+    booking_url: "https://guarania.com.py"
+    meeting_duration: "15 minutos"
+    meeting_owner: "Bader Vera"
 
 icp:
   industries:
-    - "SaaS"
-    - "Marketing Agency"
-  company_size: "10-200 employees"
+    - "Servicios Financieros y Contables"
+    - "Comercio y Retail"
+    - "Salud y Clínicas"
+    - "Empresas de Logística y Distribución"
+    - "Agencias y Servicios Profesionales"
+    - "PyMEs y Empresas en Expansión"
+  company_size: "5-150 empleados"
   titles:
-    - "VP Marketing"
-    - "Head of Growth"
-    - "CMO"
-    - "Director of Marketing"
+    - "Director General"
+    - "CEO"
+    - "Dueño / Propietario"
+    - "Gerente General"
+    - "Director de Operaciones"
+    - "COO"
+    - "Director de Tecnología / CTO"
+    - "Gerente de Finanzas"
   geography:
-    - "United States"
-  # Roles that signal a company is in-market RIGHT NOW (a company hiring a
-  # "Head of Growth" is shopping for growth tooling). Used for careers-page
-  # scanning and job-board discovery. Empty = fall back to titles above.
+    - "Paraguay"
+    - "América Latina"
   hiring_signals: []
 
 channels:
   email:
     enabled: true
-    provider: "gmail"          # gmail (recommended) | microsoft | smtp | instantly
+    provider: "smtp"          # gmail (recommended) | microsoft | smtp | instantly
     max_daily_sends: 50
     require_approval: true      # native: review in Outbox; Instantly: sending held
-    # link_domains: ["mainsite.com"]   # your own sites besides the sending
-    #                                  # domain and booking link; on autopilot,
-    #                                  # an email linking elsewhere waits for you
-    # phone_numbers: ["+1 555 010 2000"]  # your own numbers; on autopilot, an
-    #                                  # email giving any other number waits for you
     send_to_risky: false        # also send to catch-all domains (off = safest)
     # min_write_score: 60       # only write for prospects Scout scored at
     #                           # least this (0-100); 0 or unset = everyone
