@@ -6,9 +6,9 @@ ENV PYTHONUNBUFFERED=1 \
     PLAYWRIGHT_BROWSERS_PATH=/ms-playwright \
     SELLBIRD_HOME=/app
 
-# System deps (curl needed for the Claude CLI installer)
+# System deps (curl needed for the Claude CLI installer, libatomic1 for node/playwright on aarch64)
 RUN apt-get update && apt-get install -y --no-install-recommends \
-    curl ca-certificates \
+    curl ca-certificates libatomic1 \
     && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /app
