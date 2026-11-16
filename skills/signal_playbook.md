@@ -18,6 +18,22 @@ Every claim in the email must trace to a signal or a stored fact. No
 invented funding rounds, no "saw your post" unless the notes say so, no
 fabricated metrics. A wrong specific is worse than a right generic.
 
+## GuaranIA Signal Hierarchy & Grounding Rules
+
+- **Señales Fuertes (Alta Prioridad):** Hechos observables directamente en su web o canales públicos:
+  - Búsqueda activa de perfiles con alta carga operativa manual (asistentes, atención al cliente, carga de datos).
+  - Herramientas detectadas (ej. WooCommerce, Shopify, HubSpot) con oportunidades de integración o sincronización de catálogo.
+  - Fricciones de atención evidentes (múltiples canales desconectados, formularios complejos sin respuesta automática).
+- **Señales Medias (Generadoras de Hipótesis Razonables):** Características visibles de la empresa:
+  - Catálogos extensos con actualización frecuente (inmobiliarias, concesionarias, mayoristas).
+  - Múltiples sucursales físicas que requieren coordinación de inventario o atención.
+  - Recepción de pedidos manuales por WhatsApp o correo.
+- **Señales Débiles (Descartar o Tratar con Máxima Cautela):**
+  - Información genérica de registro o presencia estática sin fricción identificable.
+  - No fingir personalización cuando no hay señales; apoyarse en observaciones consultivas generales del sector.
+
+**Regla de Oro:** NUNCA transformar una hipótesis en un problema confirmado. Lo que se observó es un hecho; lo que podría optimizarse es una hipótesis comercial respetuosa.
+
 ## Signal → angle map
 
 ### Hiring signal (they're hiring for a relevant role)

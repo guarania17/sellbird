@@ -1,64 +1,54 @@
-# GuaranIA — Conocimiento del Producto y Servicios
+# GuaranIA — Conocimiento del Negocio y Metodología Comercial
 
-## ¿Quién es GuaranIA?
-GuaranIA (https://guarania.com.py) es una consultora y boutique de ingeniería de software e Inteligencia Artificial aplicada con sede en Paraguay. Ayudamos a empresas medianas y PyMEs a modernizar su operativa, automatizar flujos de trabajo repetitivos e implementar agentes autónomos de IA integrados a sus sistemas internos.
+## Identidad y Posicionamiento
+GuaranIA (https://guarania.com.py) es una consultora y empresa paraguaya especializada en la aplicación práctica de automatizaciones empresariales, inteligencia artificial e integración de sistemas.
 
-> **Regla de Alcance:** GuaranIA ofrece consultoría, implementación de soluciones a medida y automatizaciones operativas. No comercializamos licencias cerradas de nuestros sistemas internos empaquetados; cada proyecto se diseña a la medida de los procesos del cliente.
+**Posicionamiento Central:**
+> "No vendemos tecnología por tendencia. Identificamos oportunidades y eliminamos trabajo innecesario mediante automatización e Inteligencia Artificial."
 
----
-
-## Servicios Principales
-
-### 1. Automatización de Procesos Empresariales (IA + Workflows)
-- Eliminación de cuellos de botella en operaciones manuales (facturación, conciliación, soporte al cliente, seguimiento de leads).
-- Integración de canales comerciales (WhatsApp Cloud API, correo electrónico, CRMs) con los sistemas de gestión (ERPs, bases de datos SQL).
-- Reducción medible de tiempos de respuesta de horas a segundos.
-
-### 2. Implementación de Agentes de IA Conectados
-- Agentes de atención y ventas autónomos entrenados con el catálogo y políticas de la empresa.
-- Asistentes internos para empleados que consultan documentación corporativa, inventario y finanzas sin intervención humana.
-- Arquitectura segura: los datos de la empresa nunca se comparten ni se usan para re-entrenar modelos públicos.
-
-### 3. Desarrollo de Software y Microservicios a Medida
-- Desarrollo de aplicaciones web, portales de clientes y APIs de alto rendimiento.
-- Modernización de sistemas legados que impiden el crecimiento o causan fallas constantes.
-- Despliegue en infraestructura propia de alta disponibilidad en la nube (Docker, VPS dedicados, bases de datos PostgreSQL de baja latencia).
+La IA y la tecnología son nuestros medios técnicos, no el producto que ponemos en primer plano. Nuestro foco es el negocio del cliente: tiempo recuperado, menos tareas repetitivas y mayor capacidad de atención sin incrementar proporcionalmente la carga operativa.
 
 ---
 
-## Perfil de Cliente Ideal (ICP)
-- **Cargos Objetivo:** Dueños de PyMEs, Directores Generales, CEOs, Gerentes de Operaciones (COO), Directores de Tecnología (CTO) y Gerentes Administrativos/Financieros.
-- **Tamaño de Empresa:** 5 a 150 empleados.
-- **Ubicación Geográfica:** Paraguay y Latinoamérica.
-- **Industrias:**
-  - Servicios Financieros, Contables y Legal.
-  - Retail, Comercio y Distribución mayorista.
-  - Clínicas y Salud Privada.
-  - Logística, Importación y Transporte.
-  - Agencias y Empresas de Servicios B2B en fase de expansión.
+## El Tríptico Comercial de GuaranIA
+1. **Radar de Oportunidades GuaranIA (Puerta de Entrada):**
+   Análisis inicial sin costo donde evaluamos la operativa visible de la empresa y entregamos un diagnóstico con hasta 3 oportunidades de optimización. Sin compromiso de contratación y sin desarrollo gratuito.
+2. **Diagnóstico GuaranIA (Metodología de Descubrimiento):**
+   Sesión de trabajo profunda para relevar cuellos de botella específicos, flujos de datos y calcular el retorno de inversión (ROI) antes de invertir.
+3. **Implementación GuaranIA (Conversión a Proyecto):**
+   Desarrollo e integración de la solución a medida, garantizando que el sistema sea útil, mantenible y adoptado por el equipo del cliente.
 
 ---
 
-## Dolores Principales que Resolvemos
-1. **Pérdida de clientes por demora en respuestas:** Equipos comerciales colapsados respondiendo manualmente las mismas consultas en WhatsApp y correo.
-2. **Costo excesivo en tareas administrativas rutinarias:** Empleados calificados pasando 40% de su jornada copiando datos entre hojas de cálculo y sistemas viejos.
-3. **Falta de visibilidad operativa:** Directores que no saben el estado real de sus ventas o entregas porque la información está dispersa.
-4. **Miedo a gastar en tecnología sin retorno:** Empresas que contrataron desarrollos lentos o genéricos que nadie terminó usando.
+## Catálogo de Soluciones por Necesidad
+
+| Área de Impacto | Problema Típico del Cliente | Qué Implementa GuaranIA |
+| :--- | :--- | :--- |
+| **Comercial y Ventas** | Consultas en WhatsApp o web que se enfrían o quedan sin seguimiento | Automatización de respuestas inmediatas, calificación y asignación a vendedores |
+| **Administración y Operativa** | Empleados pasando horas cargando datos entre planillas y sistemas | Extracción de datos con IA, procesamiento automático de pedidos y facturas |
+| **Atención al Cliente** | Mismas preguntas repetitivas colapsando canales de soporte | Asistentes inteligentes entrenados con las políticas y catálogos de la empresa |
+| **Integración de Sistemas** | Herramientas existentes que no se comunican entre sí (silos) | Conectores y APIs entre ERPs, CRMs y bases de datos |
+| **Modernización Digital** | Sistemas legados u obsoletos que frenan el crecimiento | Microservicios y portales web modernos en infraestructura de alta velocidad |
 
 ---
 
-## Objeciones Típicas y Argumentos
+## Respuestas Consultivas a Objeciones
 
-- **"La IA es muy cara o solo para multinacionales"**
-  - *Respuesta:* En GuaranIA no vendemos proyectos millonarios a ciegas. Diseñamos pilotos modulares rápidos donde el retorno de inversión (ahorro de horas-hombre o aumento de conversión) se amortiza en los primeros 30 a 60 días.
-- **"Ya tenemos un equipo de TI / programadores"**
-  - *Respuesta:* Excelente. Frecuentemente trabajamos codo a codo con los equipos internos como aceleradores técnicos de IA, implementando la infraestructura especializada sin quitarles el foco de su día a día.
-- **"No estamos seguros de si nuestros procesos están listos para IA"**
-  - *Respuesta:* La IA solo tiene valor si resuelve un dolor concreto. Por eso partimos de un diagnóstico gratuito de 15 minutos donde revisamos exactamente dónde se pierde tiempo y si la automatización tiene sentido económico antes de tocar una línea de código.
+- **"Ya tenemos un sistema / ERP para gestionar la empresa"**
+  - *Respuesta:* Excelente. No buscamos reemplazar las herramientas que ya utilizan. Las mayores oportunidades suelen estar en conectar esos sistemas existentes para eliminar tareas manuales que hoy se hacen a mano entre una pantalla y otra.
+- **"No necesitamos inteligencia artificial"**
+  - *Respuesta:* Totalmente comprensible. No todas las empresas necesitan IA. Nuestro trabajo parte de revisar si existe algún proceso que realmente valga la pena automatizar. Si no hay una oportunidad con retorno claro, no recomendamos implementar tecnología por implementarla.
+- **"¿Cuánto cuesta?"**
+  - *Respuesta:* Depende del alcance y del proceso a intervenir. Trabajamos con presupuestos adaptados a cada necesidad. Por eso comenzamos con el Radar de Oportunidades: primero entendemos dónde se genera valor y luego dimensionamos una solución acorde.
+- **"No tenemos tiempo para evaluar esto ahora"**
+  - *Respuesta:* Lo entiendo perfectamente. La meta de GuaranIA es justamente quitar carga operativa, no sumar reuniones innecesarias. El Radar de Oportunidades lo preparamos por nuestra cuenta y te compartimos un resumen directo de 1 página.
+- **"Envíame más información por correo"**
+  - *Respuesta:* Con gusto. Para enviarte algo que realmente aplique a tu realidad, ¿qué área te genera más fricción hoy: la gestión comercial, la carga administrativa o la atención de consultas?
 
 ---
 
-## Oferta de Entrada (Hook)
-- **Diagnóstico Gratuito de Automatización (15 minutos):**
-  Una sesión ejecutiva sin costo de 15 minutos con Bader Vera (Lead AI Architect) donde evaluamos los 3 cuellos de botella operativos más costosos de tu empresa y te entregamos un mapa claro de qué procesos se pueden automatizar de inmediato.
-- **Enlace de Contacto / Agenda:** https://guarania.com.py
+## Lo que GuaranIA NO hace
+- No vendemos licencias cerradas de software genérico.
+- No inventamos métricas de ahorro ni prometemos porcentajes mágicos.
+- No regalamos desarrollo, código ni soporte en etapas de prospección.
+- No vendemos IA si una automatización tradicional resuelve mejor el problema.

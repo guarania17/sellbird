@@ -1,26 +1,29 @@
 persona:
   name: "Bader Vera"
   company: "GuaranIA"
-  role: "Fundador / Lead AI Architect"
+  role: "Consultor en Automatización e Inteligencia Artificial Empresarial"
   email: "ventas@guarania.com.py"
   linkedin: "linkedin.com/in/badervera"
-  tone: "profesional, consultivo, pragmático y orientado a resultados"
+  tone: "profesional, consultivo, pragmático, cercano y orientado a negocios"
 
 product:
-  name: "GuaranIA - Soluciones de IA y Automatización"
-  description: "Consultoría e implementación de agentes inteligentes, automatización de procesos operativos y desarrollo de software a medida para empresas y PyMEs que buscan escalar y reducir costos operativos con IA."
-  pricing: "Proyectos a medida / Consultoría"
+  name: "GuaranIA — Automatización Empresarial e Inteligencia Artificial"
+  description: "Ayudamos a empresas y PyMEs a identificar dónde pierden tiempo y dinero por procesos manuales, tareas repetitivas o falta de integración, resolviéndolo mediante automatización e Inteligencia Artificial práctica."
+  pricing: "Presupuestos personalizados según alcance y retorno de inversión esperado"
   key_benefits:
-    - "Automatización de flujos operativos y reducción drástica de tiempos manuales"
-    - "Integración de agentes de IA y LLMs conectados a las bases de datos de la empresa"
-    - "Desarrollo de software y microservicios a medida con arquitectura cloud robusta"
+    - "Reducción directa de horas dedicadas a tareas manuales y repetitivas"
+    - "Atención comercial y seguimiento de clientes más ágil sin aumentar la carga operativa"
+    - "Integración de herramientas existentes y eliminación de silos de información"
+    - "Desarrollo de software y automatizaciones a medida adaptadas a la operativa real"
   objection_responses:
-    "demasiado caro": "Entiendo perfectamente el cuidado del presupuesto. Diseñamos pilotos modulares con ROI tangible en los primeros 30 a 60 días antes de escalar la inversión."
-    "ya tenemos equipo técnico": "Excelente. Trabajamos frecuentemente como aceleradores de equipos internos, transfiriendo conocimiento e implementando la infraestructura de IA sin desviar el foco del core de tu equipo."
-    "no estamos seguros de si necesitamos IA": "Totalmente comprensible. La IA solo tiene sentido si resuelve un cuello de botella real de horas-hombre o conversión. Por eso partimos de un diagnóstico rápido de tus procesos sin compromiso."
+    "ya tenemos un sistema / ERP": "Excelente. No buscamos reemplazar las herramientas que ya utilizan. Las mayores oportunidades suelen estar en conectar esos sistemas existentes para eliminar tareas manuales que hoy se hacen a mano entre pantallas."
+    "no necesitamos inteligencia artificial": "Totalmente comprensible. No todas las empresas necesitan IA. Nuestro trabajo parte de revisar si existe algún proceso que realmente valga la pena optimizar. Si no hay una oportunidad con retorno claro, no recomendamos implementar tecnología por implementarla."
+    "cuanto cuesta": "Depende del proceso y del alcance. Trabajamos con propuestas adaptadas a cada empresa. Primero buscamos entender el problema y determinar si existe una oportunidad que justifique la inversión."
+    "no tenemos tiempo": "Lo comprendemos perfectamente. Precisamente buscamos ayudar a reducir la carga operativa, no sumar más trabajo ni reuniones innecesarias. El Radar de Oportunidades lo preparamos por nuestra cuenta."
+    "enviame mas informacion": "Con gusto. Para enviarte algo que realmente aplique a tu realidad, ¿qué área te genera más fricción hoy: la gestión comercial, la carga administrativa o la atención de consultas?"
   offer:
-    primary: "Implementación de IA y Automatizaciones operativas a medida"
-    entry: "Diagnóstico gratuito de 15 minutos sobre oportunidades de automatización en tu empresa"
+    primary: "Radar de Oportunidades GuaranIA"
+    entry: "Radar de Oportunidades GuaranIA: un análisis sin costo donde identificamos hasta 3 procesos de tu empresa que podrían optimizarse mediante automatización e IA"
     goal: "book_call"
     booking_method: "calendar_link"
     booking_url: "https://guarania.com.py"
@@ -29,26 +32,34 @@ product:
 
 icp:
   industries:
-    - "Servicios Financieros y Contables"
     - "Comercio y Retail"
+    - "Distribución y Mayoristas"
+    - "Servicios Profesionales, Contables y Financieros"
+    - "Logística y Transporte"
+    - "Inmobiliarias y Desarrollo Inmobiliario"
     - "Salud y Clínicas"
-    - "Empresas de Logística y Distribución"
-    - "Agencias y Servicios Profesionales"
     - "PyMEs y Empresas en Expansión"
-  company_size: "5-150 empleados"
+  company_size: "5-100 empleados"
   titles:
+    - "Propietario / Dueño"
     - "Director General"
-    - "CEO"
-    - "Dueño / Propietario"
     - "Gerente General"
-    - "Director de Operaciones"
-    - "COO"
-    - "Director de Tecnología / CTO"
-    - "Gerente de Finanzas"
+    - "Gerente de Operaciones / COO"
+    - "Gerente Administrativo"
+    - "Gerente Comercial"
+    - "Responsable de Tecnología / CTO"
   geography:
     - "Paraguay"
+    - "Asunción y Gran Asunción"
+    - "Departamento Central"
+    - "Alto Paraná"
     - "América Latina"
   hiring_signals: []
+
+writer:
+  email_rules: "skills/email_rules.md"
+  site_facts: true
+  require_tip: true
 
 channels:
   email:
