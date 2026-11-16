@@ -878,6 +878,10 @@ class EnvConfig(BaseModel):
     m365_tenant_id: str = ""
     # Optional: only used when compliance.precleared.enabled is true.
     precleared_api_key: str = ""
+    # AI Providers
+    deepseek_api_key: str = ""
+    gemini_api_key: str = ""
+    openai_api_key: str = ""
 
 
 def _format_validation_error(e: ValidationError) -> str:
@@ -945,6 +949,16 @@ def load_config(config_path: str | None = None) -> SellbirdConfig:
             f"got {type(data).__name__}."
         )
 
+    # Support environment variable overrides for brain provider & model
+    if os.getenv("SELLBIRD_BRAIN_PROVIDER"):
+        brain_dict = data.get("brain")
+        if not isinstance(brain_dict, dict):
+            brain_dict = {}
+        brain_dict["provider"] = os.getenv("SELLBIRD_BRAIN_PROVIDER").strip()
+        if os.getenv("SELLBIRD_BRAIN_MODEL"):
+            brain_dict["model"] = os.getenv("SELLBIRD_BRAIN_MODEL").strip()
+        data["brain"] = brain_dict
+
     try:
         config = SellbirdConfig(**data)
         config._source_path = str(config_path)
@@ -968,22 +982,31 @@ def load_brain_config(config_path: str | None = None) -> BrainConfig:
     default; an invalid section raises rather than silently switching
     providers.
     """
+    section = {}
     if config_path is None:
         try:
             config_path = _find_config_file()
         except ConfigFileNotFoundError:
-            return BrainConfig()
+            if os.getenv("SELLBIRD_BRAIN_PROVIDER"):
+                section["provider"] = os.getenv("SELLBIRD_BRAIN_PROVIDER").strip()
+            if os.getenv("SELLBIRD_BRAIN_MODEL"):
+                section["model"] = os.getenv("SELLBIRD_BRAIN_MODEL").strip()
+            return BrainConfig(**section)
     try:
         data = yaml.safe_load(read_user_text(config_path))
     except FileNotFoundError:
-        return BrainConfig()
+        data = {}
     except (yaml.YAMLError, OSError) as e:
         raise ConfigError(f"Could not read the brain settings in {config_path}: {e}")
-    section = data.get("brain") if isinstance(data, dict) else None
-    if section is None:
-        return BrainConfig()
-    if not isinstance(section, dict):
+    raw_section = data.get("brain") if isinstance(data, dict) else None
+    if isinstance(raw_section, dict):
+        section.update(raw_section)
+    elif raw_section is not None:
         raise ConfigError(f"'brain' in {config_path} must be a mapping.")
+    if os.getenv("SELLBIRD_BRAIN_PROVIDER"):
+        section["provider"] = os.getenv("SELLBIRD_BRAIN_PROVIDER").strip()
+    if os.getenv("SELLBIRD_BRAIN_MODEL"):
+        section["model"] = os.getenv("SELLBIRD_BRAIN_MODEL").strip()
     try:
         return BrainConfig(**section)
     except ValidationError as e:
@@ -1021,6 +1044,9 @@ def load_env() -> EnvConfig:
         m365_client_id=os.getenv("M365_CLIENT_ID", "").strip(),
         m365_tenant_id=os.getenv("M365_TENANT_ID", "").strip(),
         precleared_api_key=os.getenv("PRECLEARED_API_KEY", "").strip(),
+        deepseek_api_key=os.getenv("DEEPSEEK_API_KEY", "").strip(),
+        gemini_api_key=os.getenv("GEMINI_API_KEY", "").strip(),
+        openai_api_key=os.getenv("OPENAI_API_KEY", "").strip(),
     )
     return env
 
