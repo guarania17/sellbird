@@ -32,29 +32,42 @@ product:
 
 icp:
   industries:
-    - "Comercio y Retail"
-    - "Distribución y Mayoristas"
-    - "Servicios Profesionales, Contables y Financieros"
-    - "Logística y Transporte"
-    - "Inmobiliarias y Desarrollo Inmobiliario"
-    - "Salud y Clínicas"
-    - "PyMEs y Empresas en Expansión"
+    - "Clínicas Médicas y Sanatorios Privados"
+    - "Clínicas Estéticas y Centros Dermatológicos"
+    - "Inmobiliarias y Desarrolladoras"
+    - "Distribuidoras y Mayoristas"
   company_size: "5-100 empleados"
   titles:
     - "Propietario / Dueño"
     - "Director General"
     - "Gerente General"
-    - "Gerente de Operaciones / COO"
-    - "Gerente Administrativo"
+    - "Director Médico"
     - "Gerente Comercial"
-    - "Responsable de Tecnología / CTO"
+    - "Gerente de Operaciones"
   geography:
-    - "Paraguay"
-    - "Asunción y Gran Asunción"
-    - "Departamento Central"
-    - "Alto Paraná"
-    - "América Latina"
+    - "Asunción"
+    - "Gran Asunción"
+    - "San Lorenzo"
+    - "Luque"
   hiring_signals: []
+  keyword_variants:
+    "Clínicas Médicas y Sanatorios Privados":
+      - "sanatorio privado"
+      - "centro odontológico"
+      - "laboratorio clínico privado"
+    "Clínicas Estéticas y Centros Dermatológicos":
+      - "clínica estética"
+      - "centro dermatológico y estética"
+      - "medicina estética facial"
+      - "spa médico y estética corporal"
+    "Inmobiliarias y Desarrolladoras":
+      - "desarrolladora inmobiliaria"
+      - "bienes raíces"
+      - "administración de propiedades"
+    "Distribuidoras y Mayoristas":
+      - "distribuidora mayorista"
+      - "importadora y distribuidora"
+      - "proveedor de insumos y equipos"
 
 writer:
   email_rules: "skills/email_rules.md"
@@ -146,9 +159,20 @@ compliance:
   # for an email you already approved in the Outbox, and picked up by a running
   # Sellbird at once. If you trained Sellbird, set it in sellbird.local.yaml instead:
   # that file wins.
-  do_not_contact: []
-  #   - "competitor.example"
-  #   - "jane@acme.example"
+  do_not_contact:
+    - "*.gov.py"
+    - "*.gob.py"
+    - "*.gub.uy"
+    - "*.mil.py"
+    - "*.edu.py"
+    - "mspbs.gov.py"
+    - "mic.gov.py"
+    - "informacionpublica.paraguay.gov.py"
+    - "hacienda.gov.py"
+    - "ips.gov.py"
+    - "ande.gov.py"
+    - "copaco.com.py"
+    - "essap.com.py"
   precleared:
     enabled: false
     sender_country: ""          # where your business is based: GB, US, CA, DE, FR, AU,
