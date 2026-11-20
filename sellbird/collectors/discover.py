@@ -833,7 +833,12 @@ class Serper(DiscoveryProvider):
                      "Content-Type": "application/json"},
             # Free accounts reject num > 10 (HTTP 400 "Query pattern not
             # allowed for free accounts"), verified 2026-10-26.
-            json={"q": query.keyword(), "num": max(1, min(query.depth, 10))},
+            json={
+                "q": query.keyword(),
+                "num": max(1, min(query.depth, 10)),
+                "gl": "py" if "paraguay" in query.location.lower() else "us",
+                "hl": "es" if "paraguay" in query.location.lower() else "en",
+            },
         )
         r.raise_for_status()
         data = r.json()

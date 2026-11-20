@@ -45,10 +45,9 @@ icp:
     - "Gerente Comercial"
     - "Gerente de Operaciones"
   geography:
-    - "Asunción"
-    - "Gran Asunción"
-    - "San Lorenzo"
-    - "Luque"
+    - "Asunción Paraguay"
+    - "San Lorenzo Paraguay"
+    - "Luque Paraguay"
   hiring_signals: []
   keyword_variants:
     "Clínicas Médicas y Sanatorios Privados":
