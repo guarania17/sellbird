@@ -510,8 +510,8 @@ def _needs_setup() -> bool:
 
     env_file = PROJECT_ROOT / ".env"
 
-    # If .env doesn't exist, definitely needs setup
-    if not env_file.exists():
+    # If .env doesn't exist, check if required env vars or config are already present in os.environ
+    if not env_file.exists() and not (os.getenv("SELLBIRD_DASHBOARD_TOKEN") or os.getenv("DEEPSEEK_API_KEY") or os.getenv("SERPER_API_KEY")):
         return True
 
     # sellbird.local.yaml wins over the tracked sellbird.yaml template, same
